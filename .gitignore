@@ -59,3 +59,8 @@
 **/*secret*
 **/*.jsonl
 backups/
+
+# The control plane's own config is NOT runtime state. A broad *.json rule above was
+# swallowing lanes.json, which is the contract every lane field is declared in -- losing
+# it loses the design, not a cache. Un-ignore by name, never by widening the rule.
+!lanes.json

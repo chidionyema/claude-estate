@@ -1,0 +1,50 @@
+{
+  "_what": "Per-session BEHAVIOUR PROFILE. Read fresh by goal-guard.py on EVERY hook call, so an edit here changes live sessions with no restart. A session picks its lane with CLAUDE_LANE=<name>; unset means 'default'.",
+  "_founder_asks_2026_08_21": "keep agents goal and outcome oriented / so they dont get too sidetracked and into rabbit holes / and when they do can work their way back to objectives / how to instill best practices awareness as first principle / what not to do, shortest and most efficient path / increasing throughput / how to encourage researching better and more efficient ways / take ownership in platform improvement / proactive not passive / so different lanes / fully configurable from ops dashboard",
+  "_fields": {
+    "goal_required": "session must have a goal on disk before it works",
+    "readonly_run_limit": "consecutive PROVABLY read-only tool calls before the walk-back fires. 0 = off. NOT a measured number yet -- see _threshold_provenance.",
+    "research_budget_calls": "recon calls allowed before a decision must be made. 0 = off, not yet enforced.",
+    "proactive": "when idle, claim an item off the improvement queue instead of waiting.",
+    "close_condition": "the turn may not end without DONE:/BLOCKED:."
+  },
+  "_threshold_provenance": "25 is a STARTING VALUE, not a measurement. The only numbers we have describe how bad drift gets, not where it begins: across 10 sessions / 36h / 22,395 tool calls the worst read-only run was 1017 and the median worst-run was 391. Every firing writes a goal_drift line to ~/.claude/state/ledger.jsonl, so the real number is measurable in a week and this default replaced by one.",
+  "lanes": {
+    "default": {
+      "goal_required": false,
+      "readonly_run_limit": 25,
+      "proactive": false,
+      "close_condition": false
+    },
+    "build": {
+      "_for": "shipping a specific change. Tight rein: reading is a means, not the work.",
+      "goal_required": true,
+      "readonly_run_limit": 15,
+      "research_budget_calls": 10,
+      "proactive": false,
+      "close_condition": true
+    },
+    "research": {
+      "_for": "a question whose answer is not on this machine. Reading IS the work, so the rein is long -- but not infinite, because 1017 happened inside a session that believed exactly that.",
+      "goal_required": true,
+      "readonly_run_limit": 60,
+      "research_budget_calls": 0,
+      "proactive": false,
+      "close_condition": true
+    },
+    "incident": {
+      "_for": "LAW 1 is open. The objective has a number in it and nothing else is legal.",
+      "goal_required": true,
+      "readonly_run_limit": 12,
+      "proactive": false,
+      "close_condition": true
+    },
+    "platform": {
+      "_for": "founder ask: 'what take ownership in platform improvement', 'proactive not passive'. No externally-set goal, so the session claims one.",
+      "goal_required": true,
+      "readonly_run_limit": 25,
+      "proactive": true,
+      "close_condition": true
+    }
+  }
+}
