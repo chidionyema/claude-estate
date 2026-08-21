@@ -8,43 +8,48 @@
     "proactive": "when idle, claim an item off the improvement queue instead of waiting.",
     "close_condition": "the turn may not end without DONE:/BLOCKED:."
   },
-  "_threshold_provenance": "25 is a STARTING VALUE, not a measurement. The only numbers we have describe how bad drift gets, not where it begins: across 10 sessions / 36h / 22,395 tool calls the worst read-only run was 1017 and the median worst-run was 391. Every firing writes a goal_drift line to ~/.claude/state/ledger.jsonl, so the real number is measurable in a week and this default replaced by one.",
+  "_threshold_provenance": "MEASURED 2026-08-21, replacing the 25 that was a guess. Corpus: 79 transcripts >50KB, 8588 read-only runs, classified by importing goal-guard's own classify() so the calibration cannot drift from the thing it calibrates. Distribution: p50=2 p90=6 p95=9 p99=16 max=43. TWO INSTRUMENTS DISAGREED BY 24x AND THAT DISAGREEMENT IS THE MAIN FINDING: session_noise.py reported a worst run of 1017, this reports a corpus max of 43. Neither was broken -- session_noise counted calls since the last Edit/Write TOOL, and 58.4% of this estate's state changes happen through a Bash command instead. Re-running with the narrow definition reproduces 1038, which confirms the cause. The guard's own definition is the one that matters. Thresholds are picked off FIRING RATE PER SESSION, which is what the literature says to calibrate against (arXiv 2608.02464 recalibrates per deployment; moved across model families without it, its AUROC falls to 0.527, chance). Bands: >=3 fires/session is noise an agent learns to ignore, 0.6-3 is usable, <0.15 is inert. The old 25 fired 8 times in 79 sessions -- 0.10, INERT. It was not too aggressive, it was not there at all. The discarded angle: 'terminal' runs (session ends still reading) looked like a clean label-free positive class, but there were only 23 of them and the best separation rested on ONE. A ratio from one sample is not a measurement, so it was dropped rather than reported.",
   "lanes": {
     "default": {
       "goal_required": false,
-      "readonly_run_limit": 25,
+      "readonly_run_limit": 16,
       "proactive": false,
-      "close_condition": false
+      "close_condition": false,
+      "_readonly_run_limit_why": "was 25, measured to 16. p99 of every read-only run in the corpus. Fires 1.10x per session."
     },
     "build": {
       "_for": "shipping a specific change. Tight rein: reading is a means, not the work.",
       "goal_required": true,
-      "readonly_run_limit": 15,
+      "readonly_run_limit": 12,
       "research_budget_calls": 10,
       "proactive": false,
-      "close_condition": true
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 15, measured to 12. deliberately the tightest lane. 2.72x per session. During a build a long read run is the most suspicious thing on the board, because writing is the work and reading is the means."
     },
     "research": {
-      "_for": "a question whose answer is not on this machine. Reading IS the work, so the rein is long -- but not infinite, because 1017 happened inside a session that believed exactly that.",
+      "_for": "a question whose answer is not on this machine. Reading IS the work, so the rein is the longest of any lane. It is not infinite: the longest read-only run in 79 transcripts was 43, so a session past 20 is already in the top 0.3% of everything this estate has ever done.",
       "goal_required": true,
-      "readonly_run_limit": 60,
+      "readonly_run_limit": 20,
       "research_budget_calls": 0,
       "proactive": false,
-      "close_condition": true
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 60, measured to 20. the loosest lane. 0.33x per session -- rare by design, because reading IS the work here and a guard that nags a researcher is a guard they learn to ignore. Not infinite: 43 was the longest run anyone has ever had."
     },
     "incident": {
       "_for": "LAW 1 is open. The objective has a number in it and nothing else is legal.",
       "goal_required": true,
-      "readonly_run_limit": 12,
+      "readonly_run_limit": 18,
       "proactive": false,
-      "close_condition": true
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 12, measured to 18. 0.63x per session. LOOSER than default, and that reverses the earlier guess of 12. LAW 2 requires reading the data before acting and LAW 1 says waiting on the critical path is the work, so both produce long legitimate read streams during an incident. The incident failure mode the founder measured is substitution, which is a WRITE, and this counter cannot see it."
     },
     "platform": {
       "_for": "founder ask: 'what take ownership in platform improvement', 'proactive not passive'. No externally-set goal, so the session claims one.",
       "goal_required": true,
-      "readonly_run_limit": 25,
+      "readonly_run_limit": 16,
       "proactive": true,
-      "close_condition": true
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 25, measured to 16. same as default. Fires 1.10x per session."
     }
   }
 }
