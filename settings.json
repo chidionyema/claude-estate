@@ -94,6 +94,15 @@
             "command": "python3 /Users/chidionyema/.claude/scripts/memory-loop.py"
           }
         ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/goal-guard.py"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -118,6 +127,15 @@
           {
             "type": "command",
             "command": "timeout 180 bash -c 'cd /Users/chidionyema/Documents/code/prospector && git fetch -q origin main && git show origin/main:scripts/checkout_currency.py > /tmp/checkout_currency.py && python3 /tmp/checkout_currency.py --fix' 2>&1 | tail -5 || true"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/goal-guard.py"
           }
         ]
       }
@@ -189,6 +207,15 @@
           {
             "type": "command",
             "command": "python3 /Users/chidionyema/.claude/scripts/peer-loop-fence.py"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/goal-guard.py"
           }
         ]
       }
