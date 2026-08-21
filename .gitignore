@@ -11,6 +11,13 @@
 *
 
 # --- the laws and the operating rules -------------------------------------------
+# AGENTS.md is the single source as of 2026-08-21 (founder instruction). CLAUDE.md is the
+# eleven-byte line `@AGENTS.md` that imports it, because Claude Code 2.1.238 does not read a
+# user-scope AGENTS.md on its own -- a fresh session with the laws in AGENTS.md alone answered
+# NOT PRESENT when asked to quote one. Both files are tracked: this .gitignore denies everything
+# at line 11, so leaving AGENTS.md off this list would leave the ONLY copy of the 17 laws
+# untracked and unrecoverable.
+!AGENTS.md
 !CLAUDE.md
 !README.md
 !.gitignore
