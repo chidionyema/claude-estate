@@ -64,3 +64,6 @@ backups/
 # swallowing lanes.json, which is the contract every lane field is declared in -- losing
 # it loses the design, not a cache. Un-ignore by name, never by widening the rule.
 !lanes.json
+
+# The laws evidence file: incidents, founder quotes, costs. Never injected, but must survive.
+!LAWS-INCIDENTS.md
