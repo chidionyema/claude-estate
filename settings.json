@@ -122,11 +122,23 @@
           },
           {
             "type": "command",
+            "command": "python3 /Users/chidionyema/.claude/scripts/decision-log.py --standing"
+          },
+          {
+            "type": "command",
             "command": "python3 /Users/chidionyema/Documents/code/prospector/scripts/graphify_session_hook.py"
           },
           {
             "type": "command",
+            "command": "python3 /Users/chidionyema/.claude/scripts/tmp-shadow-guard.py"
+          },
+          {
+            "type": "command",
             "command": "timeout 180 bash -c 'cd /Users/chidionyema/Documents/code/prospector && git fetch -q origin main && git show origin/main:scripts/checkout_currency.py > /tmp/checkout_currency.py && python3 /tmp/checkout_currency.py --fix' 2>&1 | tail -5 || true"
+          },
+          {
+            "type": "command",
+            "command": "python3 /Users/chidionyema/.claude/scripts/role-guard.py"
           }
         ]
       },
@@ -218,6 +230,15 @@
             "command": "python3 -E -S /Users/chidionyema/.claude/scripts/goal-guard.py"
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/chidionyema/.claude/scripts/one-branch-fence.py"
+          }
+        ]
       }
     ],
     "Stop": [
@@ -234,6 +255,15 @@
           {
             "type": "command",
             "command": "python3 /Users/chidionyema/.claude/scripts/branch-pr-guard.py"
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ~/.claude/scripts/repeat-guard.py"
           }
         ]
       },
@@ -261,6 +291,24 @@
             "command": "python3 -E -S /Users/chidionyema/.claude/scripts/close-guard.py"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/chidionyema/.claude/scripts/pr-reactor.py --hook",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/chidionyema/.claude/scripts/prompt-ledger.py",
+            "timeout": 30
+          }
+        ]
       }
     ]
   },
@@ -270,11 +318,13 @@
     "padding": 0
   },
   "enabledPlugins": {
-    "stripe@claude-plugins-official": false
+    "stripe@claude-plugins-official": false,
+    "mattpocock-skills@claude-plugins-official": true
   },
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "skipWorkflowUsageWarning": true,
+  "agentPushNotifEnabled": true,
   "autoMode": {
     "allow": [
       "$defaults",
@@ -294,6 +344,5 @@
       "The user owns the GitHub repo chidionyema/prospector and the Fly.io organisation hosting the prospector-*, store-*, mumchimp-* and tie-* apps. Commands aimed at those resources administer the user's own infrastructure.",
       "Standing instruction from the user: prefer acting to asking on routine estate work. Interruptions on ordinary read, inspect, deploy and repo-administration commands cost more than they protect."
     ]
-  },
-  "agentPushNotifEnabled": true
+  }
 }
