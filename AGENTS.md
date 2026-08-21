@@ -1,6 +1,6 @@
 # The laws
 
-Seventeen rules, in priority order. **When two laws want different things, the lower number wins.**
+Eighteen rules, in priority order. **When two laws want different things, the lower number wins.**
 That tie-break is the whole of it, and it exists because the laws used to be an unordered set: LAW 6
 kept firing while LAW 1 was still open.
 
@@ -28,6 +28,7 @@ keep.
 | 15 | Evidence must converge from two angles | before you call anything proven |
 | 16 | Leave a path back when you drop something | the moment you park or switch away |
 | 17 | Prove it is operational before you say it is done | before the word DONE reaches the founder |
+| 18 | Every founder request is a tracked item | the moment he asks for anything |
 
 # THE FOUR HARD RULES
 
@@ -395,6 +396,45 @@ Say DONE only after the proof is in the reply. Otherwise the first word is WORKI
 **You are breaking it when** you report the action you took instead of the state it produced. An
 action always completes; whether the world changed is a separate question, and it is the only one
 the founder asked.
+
+---
+
+# LAW 18 — EVERY FOUNDER REQUEST IS A TRACKED ITEM
+
+He should not have to remember what he asked for, and he should not have to ask twice. Every request
+he types is an item with a state, and it closes when a command proves it, not when you say so.
+
+Capture is already automatic and is not this law. `directive-capture.py` catches the prompt on
+UserPromptSubmit; `prompt-ledger.py` runs on Stop and catches the rest, including the messages he
+types mid-turn, which never raise that hook. Between them nothing he types is lost. Measured
+2026-08-21 on this machine: 139 prompts captured for one project, 0 closed. Capture was never the
+gap. Closing is. Both ledgers exist — do not write a third.
+
+The ledger for the project you are in:
+
+```
+D=~/.claude/projects/$(pwd | tr / -)
+prompt-ledger.py --project-dir $D                  # reconcile first: --list alone reads a stale file
+prompt-ledger.py --project-dir $D --list open      # what he asked for and nobody closed
+prompt-ledger.py --project-dir $D --spec <ID> --statement "<what done means>" --ac "<shell command>"
+prompt-ledger.py --project-dir $D --verify <ID>    # closes only if every AC exits 0
+```
+
+- **Read the open list at the top of the turn.** Everything on it he has already asked for once.
+- **Give the item a spec before you start the work.** The statement is what done means. Each `--ac`
+  is a shell command that must exit 0.
+- **An acceptance criterion is a command, never a sentence.** `--verify` runs them. A row cannot be
+  closed by an agent asserting it is closed, which is the whole point of the mechanism.
+- **One item per request; split it when it is several.** Splitting is legal, dropping is not.
+- **A request you will not do is `--retract` with the reason.** Refusing is allowed, going quiet is
+  not.
+- **His board shows the counts** — `founder_board.py`, http://127.0.0.1:8787. The
+  `ESTATE_BOARD.jsonl` in LAW 10 is the peer channel and is a different thing.
+
+LAW 16 covers a thread you put down. This one fires for every request from the moment it arrives,
+whether or not you ever drop it.
+
+**You are breaking it when** the work is finished and the ledger still says open.
 
 ---
 
