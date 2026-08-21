@@ -253,6 +253,14 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/close-guard.py"
+          }
+        ]
       }
     ]
   },
