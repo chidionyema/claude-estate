@@ -14,9 +14,9 @@
       "goal_required": false,
       "readonly_run_limit": 16,
       "proactive": false,
-      "close_condition": true,
+      "close_condition": false,
       "_readonly_run_limit_why": "was 25, measured to 16. p99 of every read-only run in the corpus. Fires 1.10x per session.",
-      "_close_condition_why": "was false, which meant close_condition was declared in four lanes and active in none, because every session runs in default unless it says otherwise. That is the same inert-guard mistake as the readonly_run_limit of 25, one day later. Turned on 2026-08-21 after a LAW 11 broadcast; a peer returned two edge cases and both were addressed before the flip."
+      "_close_condition_why": "OFF again 2026-08-21, twenty minutes after being turned on. It refused a reply that DID open with DONE:. Not a policy problem -- a defect in what the hook grades. Back on when that is measured and fixed."
     },
     "build": {
       "_for": "shipping a specific change. Tight rein: reading is a means, not the work.",
