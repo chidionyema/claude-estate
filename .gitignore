@@ -1,0 +1,61 @@
+# ~/.claude -- the agent governance layer, under version control.
+#
+# THIS IS AN ALLOW-LIST. Line 1 ignores everything. Every `!` below re-admits one thing on
+# purpose. A file nobody has thought about is therefore EXCLUDED by default, which is the
+# only arrangement that survives a session dropping a key somewhere new.
+#
+# Do not convert this to a deny-list. The reason is measured, not stylistic: ~/.claude is
+# written by every session on this machine, so the set of files here changes daily and no
+# deny-list stays complete for a week.
+
+*
+
+# --- the laws and the operating rules -------------------------------------------
+!CLAUDE.md
+!README.md
+!.gitignore
+
+# --- the guards: this is the part that actually refuses things ------------------
+!scripts/
+!scripts/**/*.py
+!scripts/**/*.sh
+
+# --- skills, directives, and the probes that answer "is it really live?" --------
+!skills/
+!skills/**
+!directives/
+!directives/**
+!state-probe/
+!state-probe/**
+
+# --- the incident record. Each memory file is a trap somebody already paid for --
+!projects/
+!projects/*/
+!projects/*/memory/
+!projects/*/memory/**.md
+!projects/*/checkpoints/
+!projects/*/checkpoints/*.md
+!projects/*/.state-probe
+
+# --- settings: the wiring that says which guard runs on which event -------------
+# Tracked because an unwired guard refuses nothing, so the wiring IS governance.
+# Scanned for secrets on every run of claude_repo.py before it may be committed.
+!settings.json
+
+# --- never, under any circumstances, whatever a later ! line might say ----------
+# These come last so they win. Credentials, keys, transcripts, and runtime state.
+.credentials.json
+**/.credentials.json
+*.pem
+*.key
+*.p12
+*.pfx
+.env
+.env.*
+**/.env
+**/.env.*
+**/keys/**
+**/*token*.json
+**/*secret*
+**/*.jsonl
+backups/
