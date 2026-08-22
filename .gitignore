@@ -19,6 +19,9 @@
 # untracked and unrecoverable.
 !AGENTS.md
 !CLAUDE.md
+# Both of the above are symlinks to ~/AGENTS.md now, so git holds 12 bytes
+# of path and none of the law text. This is where the text lives.
+!AGENTS.snapshot.md
 !README.md
 !.gitignore
 

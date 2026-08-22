@@ -60,253 +60,26 @@
   },
   "model": "opus[1m]",
   "hooks": {
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/directive-capture.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/context-guard-hook.py"
-          },
-          {
-            "type": "command",
-            "command": "/usr/bin/python3 /Users/chidionyema/Documents/code/prospector/scripts/graphify_query_hook.py"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/tool-drip-guard.py"
-          }
-        ]
-      }
-    ],
-    "PostCompact": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/memory-loop.py"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/goal-guard.py"
-          }
-        ]
-      }
-    ],
     "SessionStart": [
       {
+        "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/worktree-git-guard.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/memory-loop.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/peer-loop-fence.py --digest"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/decision-log.py --standing"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/Documents/code/prospector/scripts/graphify_session_hook.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/tmp-shadow-guard.py"
-          },
-          {
-            "type": "command",
-            "command": "timeout 180 bash -c 'cd /Users/chidionyema/Documents/code/prospector && git fetch -q origin main && git show origin/main:scripts/checkout_currency.py > /tmp/checkout_currency.py && python3 /tmp/checkout_currency.py --fix' 2>&1 | tail -5 || true"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/role-guard.py"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/goal-guard.py"
-          }
-        ]
-      }
-    ],
-    "PreToolUse": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/tool-drip-guard.py"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/hang-guard.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/rule-guard.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/push-pr-fence.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 ~/.claude/scripts/dupe-work-fence.py"
-          },
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/pr-freeze.py"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/context-guard-hook.py"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash|Write|Edit|NotebookEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/scope-guard.py"
-          }
-        ]
-      },
-      {
-        "matcher": "Agent|Task|Workflow",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/agent-fleet-fence.py"
-          }
-        ]
-      },
-      {
-        "matcher": "SendMessage",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/peer-loop-fence.py"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/goal-guard.py"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/one-branch-fence.py"
+            "command": "python3 $HOME/.claude/scripts/laws-link-guard.py",
+            "timeout": 10
           }
         ]
       }
     ],
     "Stop": [
       {
+        "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/idle-guard.py"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/branch-pr-guard.py"
-          }
-        ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 ~/.claude/scripts/repeat-guard.py"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/jargon-guard.py"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 ~/.claude/scripts/guard-autocommit.py",
-            "timeout": 30
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 -E -S /Users/chidionyema/.claude/scripts/close-guard.py"
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/pr-reactor.py --hook",
-            "timeout": 15
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 /Users/chidionyema/.claude/scripts/prompt-ledger.py",
-            "timeout": 30
+            "command": "python3 $HOME/.claude/scripts/laws-link-guard.py",
+            "timeout": 10
           }
         ]
       }
