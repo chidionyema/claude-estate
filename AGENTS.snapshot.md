@@ -2,7 +2,7 @@
 
 **This file is `~/AGENTS.md`.** It is the one copy. Every agent tool on this machine reads it
 through a symlink into its own directory — `~/.claude/AGENTS.md`, `~/.codex/AGENTS.md`,
-`~/.gemini/GEMINI.md`, `~/CLAUDE.md` — so there is nothing to keep in step. Edit it here. The laws
+`~/.gemini/GEMINI.md` — so there is nothing to keep in step. Edit it here. The laws
 belong to the estate, not to whichever vendor's CLI is open. Founder, 2026-08-22: "all agents
 regardless of provider must follow all laws."
 
