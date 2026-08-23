@@ -366,10 +366,21 @@ work, not closed rules. Verified by command 2026-08-23 20:0x.
 | refresh on main before review | `hooks/pre-push` | live — global `core.hooksPath` -> `~/.estate/guards/hooks/_router` -> `$GUARD_IMPL/pre-push` |
 | a feature ships with demo + onboarding | `hooks/pre-push` | live — same chain. A `feat:` push from a fresh repo naming nothing was refused for a missing `docs/demo/` and `docs/onboarding/` |
 | screenshot evidence on a PR | `pr-evidence.py` | exists, **no caller** |
-| leave a path back when you drop a thread | — | **NOT WRITTEN** |
-| checkpoint on the issue before you switch | — | **NOT WRITTEN** |
+| leave a path back when you drop a thread | `session-recorder.py --hook` | written, selftest green, self-healing (rebuilds the recovery file from the transcript, no agent involved). **Unwired**: the Stop hook needs a `settings.json` write the classifier refuses |
+| checkpoint on the issue before you switch | `session-recorder.py --hook` | same mechanism — it runs every turn, so there is nothing to remember before a switch. **Unwired**, same blocker |
 | crew is the sync layer | — | **NOT WRITTEN** |
 | experience accumulates in a queryable store | — | **NOT WRITTEN** |
+
+**Rung 1 before rung 2.** Two of these rows were written as rules to REFUSE a turn over.
+They should not be. LAW 6 ranks self-healing above a guard, and the machine can simply do
+the work: the recovery file is rebuilt from the transcript after every turn, so no agent has
+to remember a checkpoint and no guard has to refuse one. Ask that question of every row here
+before writing a refusal.
+
+**A guard that fails silently is worse than no guard.** Every mechanism above must say so
+where a person is standing when it breaks — `ESTATE_BOARD.jsonl` is handed to every session
+at startup, a log file is not. `session-recorder.py` swallowed its own failures until
+2026-08-23 and would have reported success forever with the recovery file two days stale.
 
 Where a retired rule still needs a human shape, it is written down rather than remembered:
 checkpoint format and the crew board protocol are in `~/.claude/archive/AGENTS.32-laws.md` under
