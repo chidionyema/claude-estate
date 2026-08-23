@@ -577,3 +577,130 @@ completes — I ran the edit, I set the flag, I wrote the file. Whether the worl
 separate question, and it is the only one the founder asked.
 
 ---
+
+# LAW 22 — SHOW THE GREEN RUN, DO NOT DESCRIBE IT
+
+**2026-08-22.** Founder: "i need screenshooted evidence attached to pull requests , evidence of
+verification".
+
+It arrived on a day that had already shown him the failure twice, in two different sessions, on the
+same morning.
+
+The first was the crew's own runner. `behave` exits 0 having matched no scenarios at all, so a
+checkpoint could be ticked on an empty run. `crew/bdd.py` refuses that now: a pass requires
+`scenarios_passed + scenarios_failed > 0`. A runner that reports success because it ran nothing is
+the same shape as an agent that reports success because it never checked.
+
+The second was a peer's test B. It asserted `orders -ge 1` after a restore, and a row left behind by
+the previous run satisfied it while this run's write was returning 500. Green for weeks, proving
+nothing. Their words: "a false green, worse than the crash you got."
+
+Neither was caught by reading a report. Both were caught by looking at what the machine actually
+printed.
+
+**The class is: a claim about a run, made in text, is indistinguishable from a claim about a run
+that did not happen.** Pasted output costs nothing to produce and reads identically either way. A
+screenshot is a photograph of something that existed. It does not stop a determined forger and it is
+not meant to. It moves the cost of a false green off zero, and zero is where every one of them has
+come from.
+
+The mechanism is `~/.claude/scripts/pr-evidence.py`, on PATH as `pr-evidence`. `check --pr N` exits
+1 when a pull request carries no evidence. The image is committed into the pull request's own branch
+under `docs/evidence/pr-<n>/` rather than GitHub's attachment store, so LAW 19 still holds: the
+proof leaves in the git bundle with the code.
+
+Proven on chidionyema/crew#1, 2026-08-22: `check` exit 1 before, `attach`, `check` exit 0 after.
+
+---
+
+---
+
+## LAW 28 / 29 / 30 — THE RESEARCH LAWS
+
+**What the founder said**
+
+Founder, 2026-08-22: "who uses escalate? that old model was broken and wasn't providing any value,
+no one was reacting to it, if it causes issue then disable and schedule a review meeting to
+revisit." In the same stretch he handed over two research syntheses on failure attribution,
+experience graphs and closed-loop self-improvement, and asked for the laws that come out of them.
+The laws below are the parts of those documents this estate had already paid for. The parts it had
+not — a 48-hour OSS replication rule, 30% of engineering time on non-revenue capability, 20% of
+cycles on moonshots — are resource allocations for a company with resources, they collide with
+LAW 14, and they were deliberately not written into law.
+
+**The incident — one machine, four instruments, none of them read.** 2026-08-22, on
+`prospector-hermes`. Eight supervised programs, and an audit of what they had actually produced:
+
+| instrument | what it reported | what was true |
+|---|---|---|
+| `escalate` in `coordinator.py` | 18 escalations raised | `escalation_msg_id` is `None` on all six escalated tasks. **0 notifications delivered.** 0 human responses. Six tasks still `status='escalated'` four days later, `completed_at=None`. The machine `auto_close`d two of its own unanswered alerts on 08-19. |
+| `backup-submodule` | 14 clean daily runs, exit 0 | 0 bytes ever backed up. `~/.hermes/hermes-agent` has no `.git`, so it took its `remote 'backup' not configured — skipping` branch every time. The daily off-machine backup of the whole estate had never once run. |
+| `class_auto_learned` | 7 classes "learned" | All 7 are the same `delivery-canary` failure string, fingerprinted again on every boot. It grouped. It never attributed. Nothing downstream consumed a class. |
+| `project_unworkable` | 10 events | Two per boot since 08-19, the same two: `no tool-capable executor here (claude not on PATH)` and `repo not on this machine: /Users/chidionyema/Documents/code/prospector`. The daemon had been telling anyone who looked that it could not work, for four days, in a file nobody opened. |
+
+`coordinator.db` also carries `evidence`, `telemetry`, `missions` and `milestones` tables — the
+shape of a lineage record, built and never filled. 154 events and 12 tasks in total, all created
+inside a 13-minute window on 2026-08-18, never added to again.
+
+**The cost.** Four instruments, all green or silent, all wrong. The estate looked measured and was
+not, and the belief that it was measured is what let a machine sit for four days with a dead
+coordinator, an undelivered alert queue and a backup that had never backed anything up. Separately
+and for the same reason: 501M of the estate — 151M of it agent code with no `.git` — is recoverable
+only from a Fly registry image, because the job whose whole purpose was to prevent that was one of
+the four.
+
+**The class, and why it needed three laws rather than one.** Every failure above is an instrument
+that ran correctly and changed nothing, but they fail at three different points. `escalate` and
+`backup-submodule` fail at the reader — emitted, never arrived, nobody acted (LAW 28).
+`class_auto_learned` fails at the cause — it grouped symptoms and called it learning, so no repair
+could ever be aimed (LAW 29). The empty `evidence` table and the unrecoverable 501M fail at the
+record — nothing accumulated, so every question costs full price the second time (LAW 30).
+
+**Prior art check (LAW 3).** LAW 2, LAW 15, LAW 17 and HARD RULE 1 already govern claims: get the
+proof, from two angles, and print it. None of them reaches these three. A claim can be perfectly
+proven, printed, and delivered to nobody; a cause can be perfectly evidenced and still be a
+correlation; and both can be true and leave no trace a later session can query. That gap is what
+28-30 close.
+
+Board: crew #13 (the four stopped services and the escalate evidence), crew #23 (the review, and
+the research syntheses in full).
+
+---
+
+# LAW 24 — IF IT IS LOAD-BEARING, IT IS IN GIT
+
+**2026-08-23.** Founder, on being told that a plist fix existed only in two agent transcripts:
+"this should never happen". Then: "veryting that needs to be in git needs to be in git LAW".
+
+The find was small and the hole it exposed was not. `ai.estate.kimi-bridge.plist` carried a double
+hyphen inside an XML comment, which XML forbids. `plutil -lint` called it healthy and launchd loaded
+the job, so nothing looked wrong. Every Python tool that opened it threw and skipped that job in
+silence. A peer session found it, fixed it in place, and the only record of the change was a chat
+transcript.
+
+Then the same question was asked of everything else. `~/Library/LaunchAgents` held 32 scheduled jobs
+and was in no repository. Neither was `~/.claude/settings.json`, which wires the hooks, the model
+routing and the permissions for every session. Neither was `~/AGENTS.md`, the laws themselves. The
+file that says how to work could be edited by any agent on this machine with nothing to review
+afterwards, and nobody would know what it said the day before.
+
+Measured before committing, because a directory nobody has reviewed is exactly where a credential
+sits unnoticed: 23 credential-shaped matches across the 32 plists, and all 23 were filesystem paths.
+Zero in the laws, zero in the incidents file, zero in settings.json.
+
+Five of the jobs were deleted the same turn, after being committed first. All five were already
+dead: two with empty logs untouched for 17 and 23 days, one repeating a clock error until it
+stopped, one that never had a log file at all, one stopped two days earlier on a missing database
+table. Committing them first is what made deleting them safe.
+
+**The class is: a file can be load-bearing and unreviewable at the same time, and nothing about it
+looks wrong.** The job still runs. The setting still applies. The laws still load. Nothing fails, so
+nothing prompts the question, and the absence is only ever noticed by someone going looking. Source
+code gets a repository because it is obviously code. A plist, a settings file and a rules document
+run this estate just as hard and got nothing.
+
+The guard is `~/.claude/scripts/tracked.py` against the manifest in `tracked.json`. It exits 1 when
+a tracked file and its committed copy differ. It replaced a single-directory version rather than
+sitting next to it, because two implementations of one check is the failure in LAW 3. Proved in both
+directions: it reported the five deletions before they were staged, and it reported a one-line change
+to the committed copy of the laws.
