@@ -88,3 +88,12 @@ backups/
 !/TOKEN-FRAMEWORK.md
 !/research/
 !/research/**
+
+# The agent definitions the Agent tool resolves by name, and the manifest saying
+# which plugins this machine runs. Load-bearing, small, no secrets (LAW 24).
+# The 85M plugins/cache stays out: it is a download, not a decision.
+!/agents/
+!/agents/**
+!/plugins/
+!/plugins/installed_plugins.json
+!/plugins/known_marketplaces.json

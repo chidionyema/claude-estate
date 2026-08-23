@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "plugins": {
+    "swift-lsp@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/chidionyema/.claude/plugins/cache/claude-plugins-official/swift-lsp/1.0.0",
+        "version": "1.0.0",
+        "installedAt": "2026-05-28T23:54:55.128Z",
+        "lastUpdated": "2026-05-28T23:54:55.128Z",
+        "gitCommitSha": "61c0597779bd2d670dcd4fbbf37c66aa19eb2ce6"
+      }
+    ],
+    "stripe@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/chidionyema/.claude/plugins/cache/claude-plugins-official/stripe/0.6.3",
+        "version": "0.6.3",
+        "installedAt": "2026-06-19T10:24:33.221Z",
+        "lastUpdated": "2026-08-21T11:05:13.142Z",
+        "gitCommitSha": "e8f9aee6f9a34a633243e632e650401a76c36c41"
+      }
+    ],
+    "mattpocock-skills@claude-plugins-official": [
+      {
+        "scope": "user",
+        "installPath": "/Users/chidionyema/.claude/plugins/cache/claude-plugins-official/mattpocock-skills/1.2.3",
+        "version": "1.2.3",
+        "installedAt": "2026-08-21T15:55:39.910Z",
+        "lastUpdated": "2026-08-21T15:55:39.910Z",
+        "gitCommitSha": "0ab1b63a410a03d3627979a109c8695de27af954"
+      }
+    ]
+  }
+}
