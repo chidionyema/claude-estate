@@ -106,3 +106,11 @@ backups/
 # fine, printing it is not. Repeated last so it actually applies.
 !projects/*/memory/
 !projects/*/memory/**.md
+
+# --- the dependency answer key ---------------------------------------------------
+# Every external host and credential name this repository mentions is classified here as
+# either covered by a drill or dismissed with a reason. It has to be tracked for the same
+# reason AGENTS.md does: it is the only record of which vendors this estate decided it could
+# survive losing, and drills/audit.py --sweep fails if the file is absent rather than reading
+# a repository with no answer key as clean.
+!.dependencies.json

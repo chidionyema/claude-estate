@@ -1,0 +1,20 @@
+{
+  "_": "Every host and credential name in this repository is either covered by a drill on the estate register or dismissed with a reason. claude-estate is private, so GitHub Actions cannot run here (the account's Actions billing is failing); drills/audit.py --sweep enforces it on this machine instead and posts the result to the board.",
+  "scan": {
+    "exclude": ["projects/", "state/", "ESTATE_BOARD.jsonl", "DECISIONS.jsonl",
+                "research/*.md", "research/**/*.md"],
+    "_why": "projects/ is 1586 conversation transcripts and per-project memory, and research/ is a literature review. A URL somebody pasted into a transcript, or cited in a paper summary, is not a vendor this company took on. Excluding them takes the reading from 77 hosts to 3, and the 74 removed were citations: arxiv, acm, neurips, substacks and news. The count of files this removes is printed on every run, so narrowing it further is visible rather than silent."
+  },
+  "hosts": {
+    "github.com":       {"covered_by": "github-gone"},
+    "code.claude.com":  {"covered_by": "no-anthropic"},
+    "api.deepseek.com": {"dismissed": "one of the substrate rails no-anthropic already measures; it is an alternative to Anthropic, so losing it cannot be the thing that stops us"}
+  },
+  "credentials": {
+    "ANTHROPIC_API_KEY": {"covered_by": "no-anthropic"},
+    "DEEPSEEK_API_KEY":  {"dismissed": "names an alternative rail measured by no-anthropic; unpaid today, so losing it changes nothing that runs"},
+    "GEMINI_API_KEY":    {"dismissed": "names an alternative rail measured by no-anthropic; unpaid today, so losing it changes nothing that runs"},
+    "GOOGLE_API_KEY":    {"dismissed": "names an alternative rail measured by no-anthropic; unpaid today, so losing it changes nothing that runs"},
+    "OPENAI_API_KEY":    {"dismissed": "names an alternative rail measured by no-anthropic; unpaid today, so losing it changes nothing that runs"}
+  }
+}
