@@ -97,3 +97,12 @@ backups/
 !/plugins/
 !/plugins/installed_plugins.json
 !/plugins/known_marketplaces.json
+
+# Order matters here and cost two memory files. The negation at line 44 is
+# ABOVE `**/*secret*`, and gitignore lets the LAST matching pattern win, so two
+# memory files whose NAMES say "secret" were dropped while the rule meant to
+# keep them sat higher up the file. Their contents are notes about where a
+# credential lives, which LAW 21 allows in as many words: naming a secret is
+# fine, printing it is not. Repeated last so it actually applies.
+!projects/*/memory/
+!projects/*/memory/**.md
