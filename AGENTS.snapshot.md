@@ -363,8 +363,8 @@ work, not closed rules. Verified by command 2026-08-23 20:0x.
 | warn before the session dies long | `context-guard-hook.py` | live — UserPromptSubmit |
 | load-bearing files are in git | `tracked.py --sync` | live — launchd `ai.estate.tracked-guard`, every 30 min |
 | the exit drills actually run | `drills/run.py` | live — launchd `ai.estate.drills` |
-| refresh on main before review | git hook chain | **NOT WIRED** — `.githooks/pre-push` missing in all 4 repos, and `_router` does not chain to it |
-| a feature ships with demo + onboarding | git hook chain | **NOT WIRED** — same chain |
+| refresh on main before review | `hooks/pre-push` | live — global `core.hooksPath` -> `~/.estate/guards/hooks/_router` -> `$GUARD_IMPL/pre-push` |
+| a feature ships with demo + onboarding | `hooks/pre-push` | live — same chain. A `feat:` push from a fresh repo naming nothing was refused for a missing `docs/demo/` and `docs/onboarding/` |
 | screenshot evidence on a PR | `pr-evidence.py` | exists, **no caller** |
 | leave a path back when you drop a thread | — | **NOT WRITTEN** |
 | checkpoint on the issue before you switch | — | **NOT WRITTEN** |
