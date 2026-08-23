@@ -808,6 +808,7 @@ What lives where, so nobody has to guess:
 | what | where |
 |---|---|
 | architecture decisions | `DECISIONS.md` in the crew repo |
+| **the estate right now, read this first** | **`crew/STATE.md`**, rebuilt hourly, every row a command and its output |
 | current state | `crew status`, and the project's own probe |
 | who is doing what | crew issues, assigned |
 | what changed when | the crew repo's git history |
