@@ -1,95 +1,98 @@
 {
- "_what": "Per-session BEHAVIOUR PROFILE. Read fresh by goal-guard.py on EVERY hook call, so an edit here changes live sessions with no restart. A session picks its lane with CLAUDE_LANE=<name>; unset means 'default'.",
- "_founder_asks_2026_08_21": "keep agents goal and outcome oriented / so they dont get too sidetracked and into rabbit holes / and when they do can work their way back to objectives / how to instill best practices awareness as first principle / what not to do, shortest and most efficient path / increasing throughput / how to encourage researching better and more efficient ways / take ownership in platform improvement / proactive not passive / so different lanes / fully configurable from ops dashboard",
- "_fields": {
-  "goal_required": "session must have a goal on disk before it works",
-  "readonly_run_limit": "recon calls since the last WRITE before the walk-back fires. 0 = off. NOT consecutive: classify() returns UNKNOWN for anything that is neither read nor write, and UNKNOWN moves nothing. MEASURED -- see _threshold_provenance.",
-  "proactive": "when idle, claim an item off the improvement queue instead of waiting.",
-  "close_condition": "the turn may not end without DONE:/BLOCKED:.",
-  "_deleted_research_budget_calls": "Deleted 2026-08-21, never enforced. It was readonly_run_limit under a second name -- see that field's definition. One signal, one counter; two would be PR #426's class.",
-  "best_practices": "up to 6 lines, <=160 chars each, injected under 'WHAT NOT TO DO IN THIS LANE'. Each line must name a repeated failure ON THIS ESTATE with its evidence, never general advice -- general advice is what an agent learns to skip. No inheritance: a lane sees only its own list, so the estate-wide traps are repeated deliberately into the lanes where they bite hardest."
- },
- "_threshold_provenance": "MEASURED 2026-08-21, replacing the 25 that was a guess. Corpus: 79 transcripts >50KB, 8588 read-only runs, classified by importing goal-guard's own classify() so the calibration cannot drift from the thing it calibrates. Distribution: p50=2 p90=6 p95=9 p99=16 max=43. TWO INSTRUMENTS DISAGREED BY 24x AND THAT DISAGREEMENT IS THE MAIN FINDING: session_noise.py reported a worst run of 1017, this reports a corpus max of 43. Neither was broken -- session_noise counted calls since the last Edit/Write TOOL, and 58.4% of this estate's state changes happen through a Bash command instead. Re-running with the narrow definition reproduces 1038, which confirms the cause. The guard's own definition is the one that matters. Thresholds are picked off FIRING RATE PER SESSION, which is what the literature says to calibrate against (arXiv 2608.02464 recalibrates per deployment; moved across model families without it, its AUROC falls to 0.527, chance). Bands: >=3 fires/session is noise an agent learns to ignore, 0.6-3 is usable, <0.15 is inert. The old 25 fired 8 times in 79 sessions -- 0.10, INERT. It was not too aggressive, it was not there at all. The discarded angle: 'terminal' runs (session ends still reading) looked like a clean label-free positive class, but there were only 23 of them and the best separation rested on ONE. A ratio from one sample is not a measurement, so it was dropped rather than reported.",
- "lanes": {
-  "default": {
-   "goal_required": false,
-   "readonly_run_limit": 16,
-   "proactive": false,
-   "close_condition": false,
-   "_readonly_run_limit_why": "was 25, measured to 16. p99 of every read-only run in the corpus. Fires 1.10x per session.",
-   "_close_condition_why": "OFF again 2026-08-21, twenty minutes after being turned on. It refused a reply that DID open with DONE:. Not a policy problem -- a defect in what the hook grades. Back on when that is measured and fixed.",
-   "best_practices": [
-    "Do not trust prose in a doc or a memory over a command. The CLAUDE.md you were served may be an orphaned worktree copy, 361 lines adrift from main.",
-    "Do not write a guard, test or script before one command looks for its owner: git log --all -1 -- <path>; git show origin/main:<f>; rg -l '<symbol>'.",
-    "Do not report a number you did not measure this turn. A tilde is where a command should have run: I said ~25 minutes, measured it was 5.7.",
-    "Do not grade a proxy. Four guards in one day graded comments, English words, a line prefix and a file extension instead of the thing itself.",
-    "Do not `git add -A` in this estate. store/ and storage/ are TRACKED runtime state that pytest writes to.",
-    "Do not leave an allow-list with a silent miss case. A bare `return` on the unknown branch dropped 10 criticals in 18 hours and no test failed."
-   ]
+  "_what": "Per-session BEHAVIOUR PROFILE. Read fresh by goal-guard.py on EVERY hook call, so an edit here changes live sessions with no restart. A session picks its lane with CLAUDE_LANE=<name>; unset means 'default'.",
+  "_founder_asks_2026_08_21": "keep agents goal and outcome oriented / so they dont get too sidetracked and into rabbit holes / and when they do can work their way back to objectives / how to instill best practices awareness as first principle / what not to do, shortest and most efficient path / increasing throughput / how to encourage researching better and more efficient ways / take ownership in platform improvement / proactive not passive / so different lanes / fully configurable from ops dashboard",
+  "_fields": {
+    "goal_required": "session must have a goal on disk before it works",
+    "readonly_run_limit": "recon calls since the last WRITE before the walk-back fires. 0 = off. NOT consecutive: classify() returns UNKNOWN for anything that is neither read nor write, and UNKNOWN moves nothing. MEASURED -- see _threshold_provenance.",
+    "proactive": "when idle, claim an item off the improvement queue instead of waiting.",
+    "close_condition": "the turn may not end without DONE:/BLOCKED:.",
+    "_deleted_research_budget_calls": "Deleted 2026-08-21, never enforced. It was readonly_run_limit under a second name -- see that field's definition. One signal, one counter; two would be PR #426's class.",
+    "best_practices": "up to 6 lines, <=160 chars each, injected under 'WHAT NOT TO DO IN THIS LANE'. Each line must name a repeated failure ON THIS ESTATE with its evidence, never general advice -- general advice is what an agent learns to skip. No inheritance: a lane sees only its own list, so the estate-wide traps are repeated deliberately into the lanes where they bite hardest."
   },
-  "build": {
-   "_for": "shipping a specific change. Tight rein: reading is a means, not the work.",
-   "goal_required": true,
-   "readonly_run_limit": 12,
-   "proactive": false,
-   "close_condition": true,
-   "_readonly_run_limit_why": "was 15, measured to 12. deliberately the tightest lane. 2.72x per session. During a build a long read run is the most suspicious thing on the board, because writing is the work and reading is the means.",
-   "best_practices": [
-    "Do not commit from a tree whose .git is dead: `git ls-files` prints nothing AND exits 0, so every guard grades an empty repo and blames anything but git.",
-    "Do not edit a failing test green until you have read its docstring. 2026-08-21: two of four pinned the correct behaviour and my change was the wrong one.",
-    "Do not push before `git fetch origin main && git merge origin/main --no-edit`. A stale branch fails as somebody else's bug: 4 of 5 red lines were not mine.",
-    "Do not read an exit status through a pipe. `cmd | tail` reports TAIL's status, so a failed build reads as exit 0. Capture the real one first.",
-    "Do not make a worktree with `git worktree add` alone. Run scripts/setup_worktree.sh -- .venv, agent.pem and node_modules each fail by accusing something else.",
-    "Do not say done from prose. Run the project's state probe and quote its green line: a roadmap read 'live' while the process ran 32-hour-old code."
-   ]
-  },
-  "research": {
-   "_for": "a question whose answer is not on this machine. Reading IS the work, so the rein is the longest of any lane. It is not infinite: the longest read-only run in 79 transcripts was 43, so a session past 20 is already in the top 0.3% of everything this estate has ever done.",
-   "goal_required": true,
-   "readonly_run_limit": 20,
-   "proactive": false,
-   "close_condition": true,
-   "_readonly_run_limit_why": "was 60, measured to 20. the loosest lane. 0.33x per session -- rare by design, because reading IS the work here and a guard that nags a researcher is a guard they learn to ignore. Not infinite: 43 was the longest run anyone has ever had.",
-   "best_practices": [
-    "Do not call one measurement proof. Two angles that can fail differently, or write 'single angle' and name the second one you would run.",
-    "Do not calibrate with an instrument that censors its own counterfactual. A guard blocking at 3 can never log a run of 4, so its log 'proves' 4 is inert.",
-    "Do not calibrate on a percentile. The unit is firing rate per session against the bands: >=3 is noise, 0.6-3 usable, <0.15 inert.",
-    "Do not report a capped list without saying how many it dropped. Silent truncation reads as completeness.",
-    "Do not grind for a number this box cannot give. At load average 282 every wall-clock reading is fiction; say unobtainable, with the reason.",
-    "Do not import your own copy of a classifier when calibrating a guard. Import the guard's, or the calibration drifts from the thing it calibrates."
-   ]
-  },
-  "incident": {
-   "_for": "LAW 1 is open. The objective has a number in it and nothing else is legal.",
-   "goal_required": true,
-   "readonly_run_limit": 18,
-   "proactive": false,
-   "close_condition": true,
-   "_readonly_run_limit_why": "was 12, measured to 18. 0.63x per session. LOOSER than default, and that reverses the earlier guess of 12. LAW 2 requires reading the data before acting and LAW 1 says waiting on the critical path is the work, so both produce long legitimate read streams during an incident. The incident failure mode the founder measured is substitution, which is a WRITE, and this counter cannot see it.",
-   "best_practices": [
-    "Do not write a test, a guard or a memory while the objective's number has not moved. That is LAW 6 work and it fires after the fire is out.",
-    "Do not read a status letter as a cause. F is FAILED, not QUEUED. Open the failing job log before you touch a single machine.",
-    "Do not fill a wait with prevention. Say what you are waiting on and when you will look again, then stop. The CI run does not finish sooner.",
-    "Do not report what was BUILT. Report what was RESTORED, with the number, on line 1 of the reply.",
-    "Do not disguise a refused command to get it past the filter. A denial you have to dress up is a denial to respect and say out loud.",
-    "Do not trust prose over a command: re-measure any claim in a doc that decides what you do next, including this one."
-   ]
-  },
-  "platform": {
-   "_for": "founder ask: 'what take ownership in platform improvement', 'proactive not passive'. No externally-set goal, so the session claims one.",
-   "goal_required": true,
-   "readonly_run_limit": 16,
-   "proactive": true,
-   "close_condition": true,
-   "_readonly_run_limit_why": "was 25, measured to 16. same as default. Fires 1.10x per session.",
-   "best_practices": [
-    "Do not go deep without the platform number first. Depth feels like rigour: 19.6 hours moat-blind while I measured signing keys perfectly.",
-    "Do not leave a discovery as information. A trap you found and described is a trap every peer still walks into; fix it at the SOURCE.",
-    "Do not send a peer a subject already on the board. `tail -20 ~/.claude/ESTATE_BOARD.jsonl` first -- the fence refuses the repeat, not the first raise.",
-    "Do not add a recurring cost without saying one-off or operational and pricing it IN WRITING before the run. Destroy what you rented the hour it stops earning.",
-    "Do not decide alone what you cannot undo alone. Broadcast the plan, the blast radius, and the one thing that would make you stop.",
-    "Do not trust prose over a command. The CLAUDE.md you were served may be an orphaned copy 361 lines adrift from main."
-   ]
+  "_threshold_provenance": "MEASURED 2026-08-21, replacing the 25 that was a guess. Corpus: 79 transcripts >50KB, 8588 read-only runs, classified by importing goal-guard's own classify() so the calibration cannot drift from the thing it calibrates. Distribution: p50=2 p90=6 p95=9 p99=16 max=43. TWO INSTRUMENTS DISAGREED BY 24x AND THAT DISAGREEMENT IS THE MAIN FINDING: session_noise.py reported a worst run of 1017, this reports a corpus max of 43. Neither was broken -- session_noise counted calls since the last Edit/Write TOOL, and 58.4% of this estate's state changes happen through a Bash command instead. Re-running with the narrow definition reproduces 1038, which confirms the cause. The guard's own definition is the one that matters. Thresholds are picked off FIRING RATE PER SESSION, which is what the literature says to calibrate against (arXiv 2608.02464 recalibrates per deployment; moved across model families without it, its AUROC falls to 0.527, chance). Bands: >=3 fires/session is noise an agent learns to ignore, 0.6-3 is usable, <0.15 is inert. The old 25 fired 8 times in 79 sessions -- 0.10, INERT. It was not too aggressive, it was not there at all. The discarded angle: 'terminal' runs (session ends still reading) looked like a clean label-free positive class, but there were only 23 of them and the best separation rested on ONE. A ratio from one sample is not a measurement, so it was dropped rather than reported.",
+  "lanes": {
+    "default": {
+      "goal_required": true,
+      "readonly_run_limit": 16,
+      "proactive": false,
+      "close_condition": false,
+      "_readonly_run_limit_why": "was 25, measured to 16. p99 of every read-only run in the corpus. Fires 1.10x per session.",
+      "_close_condition_why": "OFF again 2026-08-21, twenty minutes after being turned on. It refused a reply that DID open with DONE:. Not a policy problem -- a defect in what the hook grades. Back on when that is measured and fixed.",
+      "best_practices": [
+        "Do not trust prose in a doc or a memory over a command. The CLAUDE.md you were served may be an orphaned worktree copy, 361 lines adrift from main.",
+        "Do not write a guard, test or script before one command looks for its owner: git log --all -1 -- <path>; git show origin/main:<f>; rg -l '<symbol>'.",
+        "Do not report a number you did not measure this turn. A tilde is where a command should have run: I said ~25 minutes, measured it was 5.7.",
+        "Do not grade a proxy. Four guards in one day graded comments, English words, a line prefix and a file extension instead of the thing itself.",
+        "Do not `git add -A` in this estate. store/ and storage/ are TRACKED runtime state that pytest writes to.",
+        "Do not leave an allow-list with a silent miss case. A bare `return` on the unknown branch dropped 10 criticals in 18 hours and no test failed."
+      ],
+      "_goal_required_why": "ON 2026-08-24, founder (live to session 8ef72725): goals lived in chat, died at compaction, sessions invented work. Every session declares its goal on disk (--set-goal) naming its crew#133 board item. Deny mode is the follow-up PR.",
+      "gate": "report",
+      "_gate_why": "R12/crew#132: report 24h from 2026-08-24T08:12Z, measure gate_report ledger rate, then deny (LAW 38)"
+    },
+    "build": {
+      "_for": "shipping a specific change. Tight rein: reading is a means, not the work.",
+      "goal_required": true,
+      "readonly_run_limit": 12,
+      "proactive": false,
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 15, measured to 12. deliberately the tightest lane. 2.72x per session. During a build a long read run is the most suspicious thing on the board, because writing is the work and reading is the means.",
+      "best_practices": [
+        "Do not commit from a tree whose .git is dead: `git ls-files` prints nothing AND exits 0, so every guard grades an empty repo and blames anything but git.",
+        "Do not edit a failing test green until you have read its docstring. 2026-08-21: two of four pinned the correct behaviour and my change was the wrong one.",
+        "Do not push before `git fetch origin main && git merge origin/main --no-edit`. A stale branch fails as somebody else's bug: 4 of 5 red lines were not mine.",
+        "Do not read an exit status through a pipe. `cmd | tail` reports TAIL's status, so a failed build reads as exit 0. Capture the real one first.",
+        "Do not make a worktree with `git worktree add` alone. Run scripts/setup_worktree.sh -- .venv, agent.pem and node_modules each fail by accusing something else.",
+        "Do not say done from prose. Run the project's state probe and quote its green line: a roadmap read 'live' while the process ran 32-hour-old code."
+      ]
+    },
+    "research": {
+      "_for": "a question whose answer is not on this machine. Reading IS the work, so the rein is the longest of any lane. It is not infinite: the longest read-only run in 79 transcripts was 43, so a session past 20 is already in the top 0.3% of everything this estate has ever done.",
+      "goal_required": true,
+      "readonly_run_limit": 20,
+      "proactive": false,
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 60, measured to 20. the loosest lane. 0.33x per session -- rare by design, because reading IS the work here and a guard that nags a researcher is a guard they learn to ignore. Not infinite: 43 was the longest run anyone has ever had.",
+      "best_practices": [
+        "Do not call one measurement proof. Two angles that can fail differently, or write 'single angle' and name the second one you would run.",
+        "Do not calibrate with an instrument that censors its own counterfactual. A guard blocking at 3 can never log a run of 4, so its log 'proves' 4 is inert.",
+        "Do not calibrate on a percentile. The unit is firing rate per session against the bands: >=3 is noise, 0.6-3 usable, <0.15 inert.",
+        "Do not report a capped list without saying how many it dropped. Silent truncation reads as completeness.",
+        "Do not grind for a number this box cannot give. At load average 282 every wall-clock reading is fiction; say unobtainable, with the reason.",
+        "Do not import your own copy of a classifier when calibrating a guard. Import the guard's, or the calibration drifts from the thing it calibrates."
+      ]
+    },
+    "incident": {
+      "_for": "LAW 1 is open. The objective has a number in it and nothing else is legal.",
+      "goal_required": true,
+      "readonly_run_limit": 18,
+      "proactive": false,
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 12, measured to 18. 0.63x per session. LOOSER than default, and that reverses the earlier guess of 12. LAW 2 requires reading the data before acting and LAW 1 says waiting on the critical path is the work, so both produce long legitimate read streams during an incident. The incident failure mode the founder measured is substitution, which is a WRITE, and this counter cannot see it.",
+      "best_practices": [
+        "Do not write a test, a guard or a memory while the objective's number has not moved. That is LAW 6 work and it fires after the fire is out.",
+        "Do not read a status letter as a cause. F is FAILED, not QUEUED. Open the failing job log before you touch a single machine.",
+        "Do not fill a wait with prevention. Say what you are waiting on and when you will look again, then stop. The CI run does not finish sooner.",
+        "Do not report what was BUILT. Report what was RESTORED, with the number, on line 1 of the reply.",
+        "Do not disguise a refused command to get it past the filter. A denial you have to dress up is a denial to respect and say out loud.",
+        "Do not trust prose over a command: re-measure any claim in a doc that decides what you do next, including this one."
+      ]
+    },
+    "platform": {
+      "_for": "founder ask: 'what take ownership in platform improvement', 'proactive not passive'. No externally-set goal, so the session claims one.",
+      "goal_required": true,
+      "readonly_run_limit": 16,
+      "proactive": true,
+      "close_condition": true,
+      "_readonly_run_limit_why": "was 25, measured to 16. same as default. Fires 1.10x per session.",
+      "best_practices": [
+        "Do not go deep without the platform number first. Depth feels like rigour: 19.6 hours moat-blind while I measured signing keys perfectly.",
+        "Do not leave a discovery as information. A trap you found and described is a trap every peer still walks into; fix it at the SOURCE.",
+        "Do not send a peer a subject already on the board. `tail -20 ~/.claude/ESTATE_BOARD.jsonl` first -- the fence refuses the repeat, not the first raise.",
+        "Do not add a recurring cost without saying one-off or operational and pricing it IN WRITING before the run. Destroy what you rented the hour it stops earning.",
+        "Do not decide alone what you cannot undo alone. Broadcast the plan, the blast radius, and the one thing that would make you stop.",
+        "Do not trust prose over a command. The CLAUDE.md you were served may be an orphaned copy 361 lines adrift from main."
+      ]
+    }
   }
- }
 }

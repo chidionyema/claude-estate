@@ -104,3 +104,4 @@ backups/
 # survive losing, and drills/audit.py --sweep fails if the file is absent rather than reading
 # a repository with no answer key as clean.
 !.dependencies.json
+directives/.backfill-*
