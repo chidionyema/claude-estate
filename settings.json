@@ -220,6 +220,15 @@
             "command": "python3 $HOME/.claude/scripts/ticket-gate.py"
           }
         ]
+      },
+      {
+        "matcher": "Artifact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/opa-hook.py"
+          }
+        ]
       }
     ]
   },
