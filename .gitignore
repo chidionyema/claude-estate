@@ -10,6 +10,11 @@
 
 *
 
+# Every `!` line below is anchored with a leading `/`. Without it, `!README.md` admits a
+# README.md at ANY depth, not the one at the root -- which is how docs/README.md became
+# tracked the moment a docs/ tree appeared. In an allow-list, an unanchored name is a hole
+# that opens later, when someone creates a directory nobody was thinking about.
+
 # --- the laws and the operating rules -------------------------------------------
 # AGENTS.md is the single source as of 2026-08-21 (founder instruction). CLAUDE.md is the
 # eleven-byte line `@AGENTS.md` that imports it, because Claude Code 2.1.238 does not read a
@@ -17,26 +22,26 @@
 # NOT PRESENT when asked to quote one. Both files are tracked: this .gitignore denies everything
 # at line 11, so leaving AGENTS.md off this list would leave the ONLY copy of the 17 laws
 # untracked and unrecoverable.
-!AGENTS.md
-!CLAUDE.md
+!/AGENTS.md
+!/CLAUDE.md
 # Both of the above are symlinks to ~/AGENTS.md now, so git holds 12 bytes
 # of path and none of the law text. This is where the text lives.
-!AGENTS.snapshot.md
-!README.md
-!.gitignore
+!/AGENTS.snapshot.md
+!/README.md
+!/.gitignore
 
 # --- the guards: this is the part that actually refuses things ------------------
-!scripts/
-!scripts/**/*.py
-!scripts/**/*.sh
+!/scripts/
+!/scripts/**/*.py
+!/scripts/**/*.sh
 
 # --- skills, directives, and the probes that answer "is it really live?" --------
-!skills/
-!skills/**
-!directives/
-!directives/**
-!state-probe/
-!state-probe/**
+!/skills/
+!/skills/**
+!/directives/
+!/directives/**
+!/state-probe/
+!/state-probe/**
 
 # --- projects/ is deliberately NOT here -----------------------------------------
 # It held 878 checkpoint notes and 704 memory files: the founder's own words, the
@@ -49,7 +54,7 @@
 # --- settings: the wiring that says which guard runs on which event -------------
 # Tracked because an unwired guard refuses nothing, so the wiring IS governance.
 # Scanned for secrets on every run of claude_repo.py before it may be committed.
-!settings.json
+!/settings.json
 
 # --- never, under any circumstances, whatever a later ! line might say ----------
 # These come last so they win. Credentials, keys, transcripts, and runtime state.
@@ -72,7 +77,7 @@ backups/
 # The control plane's own config is NOT runtime state. A broad *.json rule above was
 # swallowing lanes.json, which is the contract every lane field is declared in -- losing
 # it loses the design, not a cache. Un-ignore by name, never by widening the rule.
-!lanes.json
+!/lanes.json
 
 # The laws evidence file: incidents, founder quotes, costs. Never injected, but must survive.
 !/LAWS-INCIDENTS.md
@@ -103,4 +108,20 @@ backups/
 # reason AGENTS.md does: it is the only record of which vendors this estate decided it could
 # survive losing, and drills/audit.py --sweep fails if the file is absent rather than reading
 # a repository with no answer key as clean.
-!.dependencies.json
+!/.dependencies.json
+directives/.backfill-*
+
+# --- LAW 22 evidence: the picture of the run -------------------------------------
+# pr-evidence.py commits a screenshot of the proving run under docs/evidence/pr-<n>/,
+# so the proof leaves with the code instead of living in GitHub's attachment store.
+# Without these lines the pre-push evidence gate cannot be satisfied in this repository
+# at all: line 11 ignores everything, `git add` refused, and the push stayed blocked.
+#
+# Admitted by extension, not by `**`. An image is opaque to a text secret scanner, so a
+# blanket rule here would admit a file class nothing in this estate can read. Render the
+# image from output you have already looked at.
+!/docs/
+!/docs/evidence/
+!/docs/evidence/**/
+!/docs/evidence/**/*.png
+!/docs/evidence/**/*.md

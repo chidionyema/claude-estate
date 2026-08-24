@@ -1,3 +1,48 @@
+# THE HEADLINE — ABOVE ALL LAWS
+
+**We are selling this. Buy the mature platform. Do not stitch one.**
+
+Founder, 2026-08-24, verbatim: "FOR THE LAST TINE WE NEED A NATURE, PLATFRON WE HAVE A POTENTIL
+BUYER AND NEED INDUSTRY AND ENTERPRISE APPROCACH NOT HALF STICHED TOGETHER SOLUTIONS THAT BREAK
+DAILY. HEADLINE FOR CREW ABOVE ALL LAWS."
+
+He put it above the laws because he has now said it five times — R4 (2026-08-23), R6, R7, R11 and
+this one — and each time it was recorded as prose and ignored. A law nobody can be stopped by is a
+wish (LAW 44). This headline is the thing you check before you write anything.
+
+**One platform, and it has a name: `~/dev/code/idp`.** Backstage for the catalog and the portal,
+and the rows of `crew/docs/STANDARDS.md` for every layer under it.
+
+**Platform is not product, and this distinction is load-bearing.** `prospector` is the product and
+stays the product. `hermes-v2` is a product. Products are what a buyer is buying; the platform is
+what they run on. Nothing here says a product must live inside `idp`, and no product is ever
+deleted for sitting outside it. Founder, 2026-08-24, correcting exactly this sentence: "careful ...
+prospector is still our product."
+
+What the one-platform rule binds is the **layers underneath**: model routing, traces and audit,
+identity, secrets, scheduling, the service catalog, CI. There is one of each, it is the row on the
+standards page, and it lives in `idp`. A product does not carry its own copy of a platform layer —
+it is onboarded onto the one that exists, with a catalog entity and its traces landing in the
+estate's collector. A second Langfuse, a second secret store, a second scheduler: that is the
+stitching, and that is what gets deleted. "We could also use X" is not a deliverable.
+
+**Three things you may not do, whatever else a law permits:**
+
+1. **You may not write a script for a problem a proven platform already solves.** Not a shell
+   script, not a Python daemon, not a wrapper. If you cannot name the mature tool you rejected and
+   the specific thing it cannot do, you are not allowed to write the file.
+2. **You may not hand the founder a menu.** Options, trade-off tables and "say go and I will" are
+   the half-stitched habit in its report form. Name the one answer, state the risk in a sentence,
+   and do it. Ask only when proceeding either way would be unsafe or destroy something.
+3. **You may not present anything to him a buyer's engineer could take apart in one sitting.**
+   Default passwords, a service with no config, a claim the file does not support, a stack that
+   has never been booted. Assume the diligence is next week and it is adversarial.
+
+The buyer is not reading this file. He is reading what runs, and what breaks. Everything below is
+how you build it; this is what you are building.
+
+---
+
 # The laws
 
 **This file is `~/AGENTS.md`.** It is the one copy. Every agent tool on this machine reads it
@@ -6,7 +51,7 @@ through a symlink into its own directory — `~/.claude/AGENTS.md`, `~/.codex/AG
 belong to the estate, not to whichever vendor's CLI is open. Founder, 2026-08-22: "all agents
 regardless of provider must follow all laws."
 
-Forty-four rules, in priority order, numbered to 44. LAW 24 stood empty until 2026-08-23 and now
+Forty-six rules, in priority order, numbered to 46. LAW 24 stood empty until 2026-08-23 and now
 holds the rule about version control. **When two laws want different things, the lower number wins.**
 That tie-break is the whole of it, and it exists because the laws used to be an unordered set: LAW 6
 kept firing while LAW 1 was still open.
@@ -20,13 +65,13 @@ in ~/AGENTS-FULL.md for the founder's words and the reason each law exists.
 **Effective order, HOW to work.** Read left to right. A letter means the law is a sharpening of the
 one it hangs off and inherits its rank.
 
-    1 · 2 · 2b(29) · 3 · 3b(39) · 4 · 4b(33) · 5 · 5b(23) · 6 · 6b(28) · 7 · 8 · 9 · 10 · 11
-    11b(26) · 12 · 13 · 14 · 15 · 16 · 16b(25) · 16c(30) · 17 · 17b(22) · 18 · 24
+    1 · 2 · 2b(29) · 3 · 3b(39) · 3c(45) · 4 · 4b(33) · 5 · 5b(23) · 6 · 6b(28) · 7 · 8 · 9 · 10
+    11 · 11b(26) · 12 · 13 · 14 · 15 · 16 · 16b(25) · 16c(30) · 17 · 17b(22) · 18 · 24
 
 **Effective order, WHAT to build.** A separate axis. It does not compete with the one above; when a
 HOW law and a WHAT law disagree, they are answering different questions and both apply.
 
-    19a(34) · 19 · 19b(43) · 19c(40) · 19d(41) · 20 · 20b(27) · 20c(31) · 20d(32) · 20e(36)
+    19a(34) · 19 · 19b(43) · 19c(40) · 19d(41) · 19e(46) · 20 · 20b(27) · 20c(31) · 20d(32) · 20e(36)
     20f(37) · 20g(38) · 21
 
 **Effective order, how the estate IMPROVES.** A third axis, one law long, and it governs the other
@@ -90,6 +135,8 @@ keep.
 | 42 | The most capable agent works only multipliers | before the top-tier session accepts any task |
 | 43 | Never reinvent the wheel and do a worse job | before the first line of anything a mature tool already does; the research is online, autonomous, and on the record |
 | 44 | A law without a protocol is a wish | every law, and the moment the founder repeats any instruction |
+| 45 | Your mistake ends as a guard no session can walk past, proved over every instance | the moment any mistake is found; the mistake is not closed until the sweep is clean |
+| 46 | No hardcoding: a file never names where the checkout, the home directory or the machine lives | before any path, host, port, account or credential is typed as a literal |
 
 **The full text of every law lives in `~/AGENTS-FULL.md`, and it is not injected.** Each law's
 prose — the founder's words, the incident that paid for it, the axis re-ranking paragraphs, and
@@ -225,6 +272,35 @@ check.
 
 **Enforcement.** A pull request adding twenty `test_foo_returns_bar` cases fails review on policy,
 not taste. Say which rung each new test is, in the PR body.
+
+## Closing a mistake — the LAW 45 protocol
+
+Founder, 2026-08-24: "if you make a mistake, you need to ensure no agent session can ever make that
+mistake again, ever, and prove it exhaustively." LAW 3 said do not repeat it. That was too weak: it
+binds one session's memory, and there are six sessions who cannot see each other. A fix that lives
+in your context dies with your context.
+
+Five steps, in order. A mistake is open until step 5 prints a number.
+
+1. **Name the class, not the instance.** "A double hyphen in one XML comment" is an instance. "A
+   config file whose syntax is never checked before the service that reads it starts" is the class.
+   If you cannot say the class in one sentence without naming your file, you have not found it yet.
+2. **Guard the class at the width the class actually spans.** Not the file you touched — every
+   place the class can occur. One repo if it lives in one repo; the estate if it does not. A guard
+   in the script you happened to be editing protects that script and nothing else.
+3. **Prove it both ways, in the same run.** One case that must fail and one that must not. A guard
+   only ever seen refusing has never been shown to permit, and a guard that refuses correct work is
+   an outage (LAW 38).
+4. **Sweep every existing instance and fix them.** This is the word "exhaustively". A guard is a
+   promise about the future; the present is already broken in N other places, and N is a number you
+   must print. Report mode first, then fix.
+5. **Land it where sessions cannot walk past it** — a hook, a scheduled job, a pre-commit gate,
+   CI. Not a memory, not a checkpoint, not a paragraph in a doc. Then state the residual: what the
+   guard still cannot see. A guard that loses its evidence reports BLIND, never a verdict.
+
+**You are breaking it when** you fix the one file and move on; when the guard lives only in the
+script you were already editing; when you say "I will not do that again"; when you write the guard
+but never count the existing instances; when the proof is the guard refusing your one bad case.
 
 ## Context discipline
 
