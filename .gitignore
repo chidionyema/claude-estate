@@ -87,6 +87,8 @@ backups/
 # before admission -- rescan before adding to this block.
 !/DECISIONS.jsonl
 !/ESTATE_BOARD.jsonl
+!/state/
+!/state/founder-actions.jsonl
 !/ESTATE_COST_AUDIT_2026-08-06.md
 !/ROLE_SET.md
 !/TOKEN-FRAMEWORK.md
