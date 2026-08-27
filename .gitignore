@@ -125,3 +125,6 @@ directives/.backfill-*
 !/docs/evidence/**/
 !/docs/evidence/**/*.png
 !/docs/evidence/**/*.md
+!docs/
+!docs/evidence/
+!docs/evidence/**
