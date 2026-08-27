@@ -125,3 +125,9 @@ directives/.backfill-*
 !/docs/evidence/**/
 !/docs/evidence/**/*.png
 !/docs/evidence/**/*.md
+
+# --- the pi-bridge executor: the MCP server, its fence tests and its cross-session primer --
+# Untracked until 2026-08-27 (crew#513): the only copy of the executor lived in a working tree.
+!/mcp/
+!/mcp/*.py
+!/mcp/*.md
