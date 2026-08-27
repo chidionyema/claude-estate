@@ -1,0 +1,4 @@
+0 failure(s)
+model                        runs  exit0 median_s touched
+minimax/MiniMax-M3              2    50%      460       4
+x                               1   100%        1       1
