@@ -130,3 +130,5 @@ directives/.backfill-*
 !docs/
 !docs/evidence/
 !docs/evidence/**
+!docs/founder/
+!docs/founder/*.md
