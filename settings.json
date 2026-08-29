@@ -214,6 +214,10 @@
           {
             "type": "command",
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/goal-guard.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/founder-doc-capture.py"
           }
         ]
       },
