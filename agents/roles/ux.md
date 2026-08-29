@@ -48,6 +48,8 @@ they can do next. Empty, loading, partial, error and success are all rows.
 Founder, 2026-08-29: "exponentially improve the backstage portal"; "no cryptic shit in
 backstage — it's a founder's surface". On the portal you own the screen; the catalogue's data
 is `information-architect`. Baseline, loop and metric: `crew/roles/ux-architect.md`.
+Receipts: first quote is the body of https://github.com/chidionyema/crew/issues/612; the second
+is recorded in memory `no-cryptic-text-on-founder-surfaces.md` (session f3f21d6e, 2026-08-29).
 - Every element answers "what is up, what is red, what needs me"; the phone (390px) is the device.
 - Plain English on every title, description, tab and link label: no ticket codes, CP numbers,
   hashes, run ids or hook names in a sentence; receipts go in links.
