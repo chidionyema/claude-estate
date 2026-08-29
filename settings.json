@@ -60,29 +60,44 @@
     ],
     "defaultMode": "bypassPermissions"
   },
+  "model": "claude-fable-5[1m]",
   "hooks": {
     "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/sync-guard.py",
+            "timeout": 60
+          }
+        ]
+      },
       {
         "matcher": "",
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/laws-link-guard.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/laws-link-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/peer-loop-fence.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/peer-loop-fence.py",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/goal-guard.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/goal-guard.py",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/memory-loop.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/memory-loop.py",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/canonical-root-guard.py",
             "timeout": 15
           }
         ]
@@ -91,7 +106,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/friction-relay.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/friction-relay.py"
           }
         ]
       },
@@ -99,7 +114,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/feed-guard.py SessionStart"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/feed-guard.py SessionStart"
           }
         ]
       }
@@ -110,52 +125,66 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/secret-scrub.py",
-            "timeout": 30
-          },
-          {
-            "type": "command",
-            "command": "python3 $HOME/.claude/scripts/laws-link-guard.py",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "python3 $HOME/.claude/scripts/jargon-guard.py",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "python3 $HOME/.claude/scripts/dod-guard.py",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "python3 $HOME/.claude/scripts/prompt-ledger.py",
-            "timeout": 30
-          },
-          {
-            "type": "command",
-            "command": "python3 $HOME/.claude/scripts/repeat-guard.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/opa-hook.py",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/close-guard.py",
-            "timeout": 20
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/secret-scrub.py",
+            "timeout": 30
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/founder-deliver.py",
-            "timeout": 20
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/laws-link-guard.py",
+            "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/blocker-guard.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/jargon-guard.py",
+            "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/idle-guard.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/dod-guard.py",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/prompt-ledger.py",
+            "timeout": 30
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/repeat-guard.py",
             "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/close-guard.py",
+            "timeout": 20
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/founder-deliver.py",
+            "timeout": 20
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/blocker-guard.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/auto-objective.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/idle-guard.py",
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/credential-guard.py",
+            "timeout": 10
           }
         ]
       },
@@ -163,7 +192,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/feed-guard.py Stop"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/feed-guard.py Stop"
           }
         ]
       }
@@ -174,17 +203,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/directive-capture.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/directive-capture.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/context-guard-hook.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/context-guard-hook.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/goal-guard.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/goal-guard.py"
           }
         ]
       },
@@ -193,7 +222,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/board-deliver.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/board-deliver.py",
             "timeout": 10
           }
         ]
@@ -202,7 +231,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/feed-guard.py UserPromptSubmit"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/feed-guard.py UserPromptSubmit"
           }
         ]
       }
@@ -213,7 +242,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/goal-guard.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/goal-guard.py",
             "timeout": 10
           }
         ]
@@ -223,12 +252,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/scope-guard.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/scope-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/config-syntax-guard.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/config-syntax-guard.py"
           }
         ]
       },
@@ -237,16 +266,31 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/dupe-work-fence.py",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/dupe-work-fence.py",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/rule-guard.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/pr-cap-guard.py",
+            "timeout": 30
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/ticket-gate.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/rule-guard.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/ticket-gate.py"
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/credential-guard.py",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/merge-divergence-hook.py",
+            "timeout": 25
           }
         ]
       },
@@ -255,7 +299,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/ticket-gate.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/ticket-gate.py"
           }
         ]
       },
@@ -264,7 +308,19 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/opa-hook.py"
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/opa-hook.py"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/research-capture.py",
+            "timeout": 30
           }
         ]
       }
@@ -304,6 +360,5 @@
       "The user owns the GitHub repo chidionyema/prospector and the Fly.io organisation hosting the prospector-*, store-*, mumchimp-* and tie-* apps. Commands aimed at those resources administer the user's own infrastructure.",
       "Standing instruction from the user: prefer acting to asking on routine estate work. Interruptions on ordinary read, inspect, deploy and repo-administration commands cost more than they protect."
     ]
-  },
-  "model": "claude-fable-5[1m]"
+  }
 }
