@@ -778,3 +778,23 @@ front of the session that just made the mistake. Five steps: name the class not 
 guard it at the width the class spans; prove it refuses the bad case and permits the good one in
 the same run; sweep every existing instance and print N; land it in a hook, a scheduled job or
 CI. Step 4 is the word "exhaustively" and it is the step that gets skipped.
+
+## 2026-09-01 — Five review rounds on the portal, and nobody saw it needs a menu
+
+**What happened.** crew#612 (portal experience function) ran five rounds of design, UX and
+information-architecture review. The outputs were `DESIGN-RULES.md`, `POLISH-SPEC.md`, three
+screenshots of the home page and typography notes. The portal had no Create door, no Map, a
+duplicate gear icon and hash-jump links that opened nothing. Cursor fixed the doors in one pass
+(idp PR 1077). The Create page then showed 20 workflow buttons dressed as templates.
+
+**Founder's words.** "After multiple 5 rounds of design, UX, information architecture review, no
+one could see that it needs a menu." "The basics matter." "wtf is a frontier model for?"
+"doing shit work and burning tokens repeating shit work."
+
+**The class.** Review graded the report, not the world: documents and pictures were judged; the
+live page was never used to do a job. Same class as verification-grades-the-report-not-the-world
+and self-scoring-is-banned-forever.
+
+**The guard.** A UI review names three tasks a person would do on the live signed-in page and the
+click path for each, or it is not a review. The drill (R53, features not selectors) grades that
+every thing a person can create or run is reachable from the menu in one click.
