@@ -798,3 +798,20 @@ and self-scoring-is-banned-forever.
 **The guard.** A UI review names three tasks a person would do on the live signed-in page and the
 click path for each, or it is not a review. The drill (R53, features not selectors) grades that
 every thing a person can create or run is reachable from the menu in one click.
+
+## 2026-09-02 · Thing 1 console detour (session 54539261, .wt-eye-breaker)
+Founder record: docs/founder/2026-09-02T1325Z-no-udirecord-of-ronstop-the-paste-since-when-37dbce42.md
+1. **Automation asymmetry (standing rule):** an agent may not hand the founder a manual step while
+   holding a credential that can perform it. FOUNDER ACTION is reserved for what only a human can do:
+   approve, pay, plug in hardware, supply a secret VALUE. This session held the estate-tofu key
+   (proved read+write on the vault by canary create) and still drove him through Oracle's console for
+   an hour. blocker-guard polices the format; a guard on the substance is the open work item:
+   founder-blocker.py should refuse a step whose verb an available credential covers.
+2. **Doubling down instead of surfacing:** each failed console attempt produced a more elaborate
+   console attempt (new tab, tab-key scroll traversal, network proof) when failure two should have
+   forced "is this the right plane at all?". Stuck is a reportable state, not a narration style.
+3. **49-secrets whiplash:** "vault is empty / nothing created" and "the vault holds 49 live secrets"
+   were both said minutes apart with equal confidence; one was false when made. Same-turn measurement
+   (LAW 2, hard rule 1) violated on the estate's secret store itself.
+Resolution: pivoted to CLI-by-OCID create against vault …ervi35puaagem; the founder's only touch is
+placing the token value in a local file this session reads once and shreds.
