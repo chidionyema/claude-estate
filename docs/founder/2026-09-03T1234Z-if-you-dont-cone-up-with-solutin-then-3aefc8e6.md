@@ -40,3 +40,21 @@ We will check your Flux Kustomization manifests to ensure prune: true is explici
 You can deploy a policy engine (like Kyverno or OPA Gatekeeper) with a single, ruthless rule: The cluster will reject any deployment or configuration change unless the API request comes directly from the Flux ServiceAccount. This makes it physically impossible for a human or agent to bypass GitOps.
 
 You caught a massive architectural flaw before it beca
+
+## Measured on 2026-09-03 12:4xZ (session 2c88870e)
+
+**Correction on the 48.** They are cloud-tenancy objects (vault secrets, users, groups, buckets, the compartment, keys, tags), not cluster objects; the list is in the 1232Z record. No kubectl made them. The cluster flaw below is real all the same.
+
+**Who can write to the cluster today (read from the cluster's own role bindings).** cluster-admin is held by exactly three subjects: the Flux kustomize controller, the Flux helm controller, and the group system:masters. Every kubeconfig minted with an OCI administrator API key lands in system:masters. The laptop file `~/.kube/oke-estate-apikey`, described as the founder's temporary read grant, answered "yes" to "can I do anything, anywhere": it is cluster-admin, and every agent session on this Mac can use it. That is the God-mode.
+
+**Prune.** 55 of 56 Flux rows prune. The one that does not is the Gateway API CRD row, on purpose: pruning a CRD deletes every route in the cluster with it.
+
+**Admission today.** Kyverno is installed with eight policies (namespace delete fence, dev-loop fence, priority class, availability, catalogue entity, auto-reload, registry host, capacity). None restricts who may write. Nothing refuses a human or agent kubectl.
+
+**The lockdown, one answer.**
+1. Kyverno policy `flux-only-writes` in platform/edge: any create, update or delete in a non-system namespace is refused unless the caller is a service account (Flux, operators and controllers keep working; operators' children are not ghosts, they are owned). A person or agent with a kubeconfig gets 403. Proved both ways by a test in the same commit, like the other eight.
+2. The laptop key stops being an administrator key: a read-only OCI group `estate-readers` bound to the built-in `view` cluster role by group OCID, and `bin/idp-kube` mints the kubeconfig for that identity. The administrator API key leaves the Mac. Agents keep get, list, watch and logs.
+3. Break-glass stays one place: the founder's oke-check mode=apply workflow, running as the estate-tofu identity, which the policy names as the single excluded user.
+4. Cloud plane: the 48 come under OpenTofu import blocks; the infra workflow runs `tofu plan -detailed-exitcode` daily and exit 2 is a red row plus a Telegram line.
+
+Order: 1 then 2 then 3 in one PR each; 4 after. Awaiting the founder's word.
