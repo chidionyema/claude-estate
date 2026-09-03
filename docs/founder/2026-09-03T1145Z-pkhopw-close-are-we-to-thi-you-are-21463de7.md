@@ -19,3 +19,9 @@ pkhopw close are we to thi You are absolutely right. I gave you a patch for the 
 | 5 Any pod can die | PARTLY | 21 of 22 workloads set no graceful-shutdown period; 5 of 22 lack a liveness probe; 6 databases are single replica by policy | platform/scheduling/require-availability.yaml:11-13 |
 
 Imperative calls still outside the Flux bootstrap: bin/idp-hydrate:15,17; bin/idp-catalog-push:16; bin/idp-oke-break-glass:403; .github/workflows/portability-drill.yml:134-135.
+
+## Correction (2026-09-03 12:0xZ, re-measured on origin/main 8fec9077)
+
+The table above was measured on a checkout behind main. Verdicts stand; the counts and the part 2 gap change:
+- Part 2: on main, external-secrets dependsOn edge (wait: true), so an edge or Kyverno failure stalls the secrets layer and every workload behind it. That supersedes the dns and keda inversions as the gap that matters. Proof: clusters/oke/secrets.yaml (external-secrets dependsOn), clusters/oke/edge.yaml.
+- Part 5 on main: 28 workloads, liveness 23, readiness 27, graceful-shutdown period 1, unparseable files 0. Proof: git ls-tree origin/main platform, parsed per file.
