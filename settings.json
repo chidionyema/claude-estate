@@ -117,6 +117,16 @@
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/feed-guard.py SessionStart"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/tool-call-recorder.py notice",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "Stop": [
@@ -238,6 +248,16 @@
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/feed-guard.py UserPromptSubmit"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/tool-call-recorder.py turn",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "PreToolUse": [
@@ -295,6 +315,11 @@
             "type": "command",
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/merge-divergence-hook.py",
             "timeout": 25
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/verification-ledger.py hook",
+            "timeout": 15
           }
         ]
       },
@@ -325,6 +350,16 @@
             "type": "command",
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/research-capture.py",
             "timeout": 30
+          }
+        ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/tool-call-recorder.py record",
+            "timeout": 5
           }
         ]
       }
