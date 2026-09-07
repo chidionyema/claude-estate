@@ -183,6 +183,15 @@
             "timeout": 30
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/session_emit.py --hook",
+            "timeout": 15
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
