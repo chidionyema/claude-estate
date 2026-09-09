@@ -295,6 +295,11 @@
             "type": "command",
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/merge-divergence-hook.py",
             "timeout": 25
+          },
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/read-shunt.py",
+            "timeout": 60
           }
         ]
       },
@@ -313,6 +318,16 @@
           {
             "type": "command",
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/opa-hook.py"
+          }
+        ]
+      },
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/read-shunt.py",
+            "timeout": 60
           }
         ]
       }
