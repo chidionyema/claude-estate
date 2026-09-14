@@ -69,7 +69,7 @@
     ],
     "defaultMode": "bypassPermissions"
   },
-  "model": "claude-fable-5-1[1m]",
+  "model": "sonnet",
   "hooks": {
     "SessionStart": [
       {
@@ -96,22 +96,8 @@
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/memory-loop.py",
-            "timeout": 15
-          },
-          {
-            "type": "command",
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/canonical-root-guard.py",
             "timeout": 15
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/session-recorder.py --restore-hook",
-            "timeout": 20
           }
         ]
       }
@@ -323,7 +309,7 @@
   "enabledPlugins": {
     "stripe@claude-plugins-official": false,
     "mattpocock-skills@claude-plugins-official": false,
-    "claude-mem@thedotmack": true
+    "claude-mem@thedotmack": false
   },
   "otelHeadersHelper": "/Users/chidionyema/dev/code/idp/bin/idp-otlp-headers",
   "tui": "fullscreen",
