@@ -5,6 +5,15 @@
       "repo": "anthropics/claude-plugins-official"
     },
     "installLocation": "/Users/chidionyema/.claude/plugins/marketplaces/claude-plugins-official",
-    "lastUpdated": "2026-08-24T19:23:27.418Z"
+    "lastUpdated": "2026-09-15T02:14:43.214Z"
+  },
+  "thedotmack": {
+    "source": {
+      "source": "github",
+      "repo": "thedotmack/claude-mem"
+    },
+    "installLocation": "/Users/chidionyema/.claude/plugins/marketplaces/thedotmack",
+    "lastUpdated": "2026-09-15T02:14:44.830Z",
+    "autoUpdate": true
   }
 }

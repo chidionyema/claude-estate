@@ -14,11 +14,11 @@
     "stripe@claude-plugins-official": [
       {
         "scope": "user",
-        "installPath": "/Users/chidionyema/.claude/plugins/cache/claude-plugins-official/stripe/0.6.3",
-        "version": "0.6.3",
+        "installPath": "/Users/chidionyema/.claude/plugins/cache/claude-plugins-official/stripe/0.8.2",
+        "version": "0.8.2",
         "installedAt": "2026-06-19T10:24:33.221Z",
-        "lastUpdated": "2026-08-21T11:05:13.142Z",
-        "gitCommitSha": "e8f9aee6f9a34a633243e632e650401a76c36c41"
+        "lastUpdated": "2026-09-14T17:49:14.380Z",
+        "gitCommitSha": "583467aab18cc7113dcd2c2e20028fe73c26eaa3"
       }
     ],
     "mattpocock-skills@claude-plugins-official": [
@@ -29,6 +29,16 @@
         "installedAt": "2026-08-21T15:55:39.910Z",
         "lastUpdated": "2026-08-21T15:55:39.910Z",
         "gitCommitSha": "0ab1b63a410a03d3627979a109c8695de27af954"
+      }
+    ],
+    "claude-mem@thedotmack": [
+      {
+        "scope": "user",
+        "installPath": "/Users/chidionyema/.claude/plugins/cache/thedotmack/claude-mem/13.24.23",
+        "version": "13.24.23",
+        "installedAt": "2026-09-05T09:51:35.894Z",
+        "lastUpdated": "2026-09-14T15:40:37.573Z",
+        "gitCommitSha": "40be934a846cca6d2038f1d9800428a4f4d5136f"
       }
     ]
   }

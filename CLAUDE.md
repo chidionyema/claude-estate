@@ -1,32 +1,15 @@
 @AGENTS.md
 
-# General Principles
+# Standing rules
 
-One-pass rule: if you can fix multiple similar issues in one scripted pass, do that. Do not fix
-them one by one. Before starting ask "can this be batched?" If yes, batch it (AGENTS.md hard rule 5).
+One-pass rule: batch every similar fix into one scripted pass — never fix issues one by one.
 
-# Hyper efficiency is the primary focus
-
-Founder, 2026-09-04: "update your .nnd file to nake you hyper efficent and token cost aware a
-you pronary focus so you deliver hyper effcciently."
-
-Token cost ranks with correctness and above thoroughness, reporting and process hygiene. Before
-any command, ask what question it answers and whether that answer changes the next action; if
-it does not, do not run it. Never write the lines a paperwork gate wants — delete the gate.
-Batch every similar fix into one pass. No narration, no recaps, fewest words that carry the
-fact. Full rule: the HYPER EFFICIENCY section of AGENTS.md.
-
-
-# ONE CLAUDE CODE SESSION (founder 2026-09-08, standing)
-
-Only one Claude Code session may run at a time. Claude Code is the planning and hand-off seat;
-DeepSeek agents do the repair and build work, ten concurrently. A session that finds another
-`claude` process running names its pid in its first reply and starts no parallel work.
-Record: `~/.claude/docs/founder/2026-09-08T1740Z-standing-rule-only-one-claude-code-session-allowed-*.md`.
-
-# OPERATIONALISATION FROM THE UI (founder 2026-09-09, standing)
-
-Every ticket and every fix names its door: the Backstage surface or button a person presses to reach
-the result, with no terminal and nothing fetched by hand. A ticket without a `Door (from the UI):`
-line is not written; a fix without its door is not landed. Record:
+Every ticket and fix names its door: the exact Backstage surface or button a person presses, no
+terminal, nothing fetched by hand. No `Door (from the UI):` line, no ticket. Record:
 `~/.claude/docs/founder/2026-09-09T0518Z-every-ticket-thinks-about-operationalisation-from-the-ui.md`.
+
+Definition of Done v3: no agent declares its own work "done" or "built" — only an independent,
+non-builder check may. Done means five checks (sellable, installable fast, verified not asserted,
+procurement-passable, owned), enforced zealously on all three `rules.yaml` planes, not just at
+reply time. This is an idp estate law, not a Claude Code preference — full text and enforcement
+status live in the idp repo: `docs/decisions/0029-definition-of-done-v3-is-five-checks-none-self-graded.md`.

@@ -34,7 +34,7 @@ PROTOCOL_VERSION = "2024-11-05"
 SERVER_NAME = "pi-bridge"
 SERVER_VERSION = "1.0.0"
 
-DEFAULT_MODEL = "minimax/MiniMax-M3"
+DEFAULT_MODEL = "estate/minimax"  # the estate router (llm.mumchimp.com via ~/.pi/agent/models.json); a direct provider name has no key here (6 of 7 runs failed on it, 2026-08-29..31)
 # Every executor run lands as one row here (LAW 28: an instrument nobody reads is not an
 # instrument; founder 2026-08-27: "hypothesis is minimax speeds us up massively ... investigate").
 # `python3 pi_bridge.py --runs` reads it back per model: runs, exit-0 share, median elapsed.
@@ -278,7 +278,8 @@ def tool_pi_execute(a: dict) -> str:
 
     log_run({"kind": "execute", "model": model, "rc": rc, "elapsed": round(elapsed, 1),
              "touched": len(touched), "cwd": cwd, "timed_out": rc == 124,
-             "head_moved": head_before.strip() != head_after.strip()})
+             "head_moved": head_before.strip() != head_after.strip(),
+             "error": tail(err, 3)[-300:] if rc != 0 else ""})  # a failed run records why (silent-green class)
     parts = [
         f"executor: {model}   exit={rc}   elapsed={elapsed:.0f}s",
         f"cwd: {cwd}",

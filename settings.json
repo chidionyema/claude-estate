@@ -76,7 +76,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/sync-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/sync-guard.py",
             "timeout": 60
           }
         ]
@@ -86,22 +86,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/single-session-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/single-session-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/laws-link-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/laws-link-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/peer-loop-fence.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/peer-loop-fence.py",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/canonical-root-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/canonical-root-guard.py",
             "timeout": 15
           }
         ]
@@ -113,46 +113,46 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/opa-hook.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/opa-hook.py",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/secret-scrub.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/secret-scrub.py",
             "timeout": 30
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/laws-link-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/laws-link-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/dod-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/dod-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/prompt-ledger.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/prompt-ledger.py",
             "timeout": 30
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/close-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/close-guard.py",
             "timeout": 20
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/founder-deliver.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/founder-deliver.py",
             "timeout": 20
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/blocker-guard.py"
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/blocker-guard.py"
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/credential-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/credential-guard.py",
             "timeout": 10
           }
         ]
@@ -161,7 +161,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/session-recorder.py --hook",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/session-recorder.py --hook",
             "timeout": 30
           }
         ]
@@ -179,7 +179,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/session_emit.py --hook",
+            "command": "python3 $HOME/dev/code/claude-guards/session_emit.py --hook",
             "timeout": 15
           }
         ]
@@ -191,12 +191,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/directive-capture.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/directive-capture.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/founder-doc-capture.py"
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/founder-doc-capture.py"
           }
         ]
       }
@@ -207,12 +207,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/scope-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/scope-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/config-syntax-guard.py"
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/config-syntax-guard.py"
           }
         ]
       },
@@ -221,35 +221,35 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/dupe-work-fence.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/dupe-work-fence.py",
             "timeout": 15
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/pr-cap-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/pr-cap-guard.py",
             "timeout": 30
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/rule-guard.py"
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/rule-guard.py"
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/ticket-gate.py"
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/ticket-gate.py"
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/credential-guard.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/credential-guard.py",
             "timeout": 10
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/merge-divergence-hook.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/merge-divergence-hook.py",
             "timeout": 25
           },
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/read-shunt.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/read-shunt.py",
             "timeout": 60
           }
         ]
@@ -259,7 +259,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/ticket-gate.py"
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/ticket-gate.py"
           }
         ]
       },
@@ -268,7 +268,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/opa-hook.py"
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/opa-hook.py"
           }
         ]
       },
@@ -277,7 +277,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/read-shunt.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/read-shunt.py",
             "timeout": 60
           }
         ]
@@ -289,7 +289,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/research-capture.py",
+            "command": "python3 $HOME/dev/code/claude-guards/hook-run.py $HOME/dev/code/claude-guards/research-capture.py",
             "timeout": 30
           }
         ]
@@ -299,7 +299,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 $HOME/.claude/scripts/slow_commands.py --post",
+            "command": "python3 $HOME/dev/code/claude-guards/slow_commands.py --post",
             "timeout": 15
           }
         ]
@@ -335,7 +335,8 @@
       "git worktree add / list / remove under /private/tmp/claude-501/** and ~/Documents/code/wt-*, and ordinary git operations in those trees.",
       "launchctl list, print, kickstart, bootout, bootstrap, enable and disable for the user's own com.prospector.* and com.hermes.* LaunchAgents.",
       "Running test suites, linters, builds and the POPDD gate anywhere in the user's own checkouts, including npm, npx, dotnet, pytest, ruff and vitest.",
-      "Merging the user's own pull requests in his own GitHub repositories, with gh pr merge or the equivalent gh api PUT repos/OWNER/REPO/pulls/N/merge, including --squash and --delete-branch. Standing instruction from the founder, 2026-08-23, in his own words: 'i dont need friction, agents should be able to merge'. A merge here is recoverable: the branch, the commits and git revert are all still in the repository. Stopping to ask him for each one is the loop he is telling us to stop."
+      "Merging the user's own pull requests in his own GitHub repositories, with gh pr merge or the equivalent gh api PUT repos/OWNER/REPO/pulls/N/merge, including --squash and --delete-branch. Standing instruction from the founder, 2026-08-23, in his own words: 'i dont need friction, agents should be able to merge'. A merge here is recoverable: the branch, the commits and git revert are all still in the repository. Stopping to ask him for each one is the loop he is telling us to stop.",
+      "chmod +x, git add and git commit for ~/dev/code/idp/bin/idp-bootstrap-concierge-tunnel specifically -- content already written and reviewed, shellcheck-clean, gated by bin/idp-root-trust --check (MEETS) and bin/idp-externalsecret-blockers (no founder-action line). Reuses the estate's existing Cloudflare root credential (R52), does not create a new credential or store. Does not extend to other tunnel/ingress/DNS/cert scripts."
     ],
     "environment": [
       "$defaults",
