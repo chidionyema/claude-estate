@@ -67,7 +67,7 @@
       "Read(**/*.db-wal)",
       "Read(**/*.db-shm)"
     ],
-    "defaultMode": "bypassPermissions"
+    "defaultMode": "auto"
   },
   "model": "sonnet",
   "hooks": {
@@ -84,6 +84,11 @@
       {
         "matcher": "",
         "hooks": [
+          {
+            "type": "command",
+            "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/single-session-guard.py",
+            "timeout": 10
+          },
           {
             "type": "command",
             "command": "python3 $HOME/.claude/scripts/hook-run.py $HOME/.claude/scripts/laws-link-guard.py",
